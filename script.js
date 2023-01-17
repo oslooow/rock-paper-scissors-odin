@@ -1,13 +1,3 @@
-//Algorithm
-/*
-  1. Get computer choice by randomizing
-  2. Get player choice
-  3. Compute a single game of rps
-  4. Compute the winner of 5 set of tos game
-*/
-
-//Pseudocode
-
 let choice = ['rock', 'paper', 'scissors'] //STORE choice AS ARRAY WITH ['rock', 'paper', 'scissors']
 function getComputerChoice() { //BEGIN getComputerChoice
   let computerChoice = Math.floor(Math.random() * choice.length);//  SET computerChoice WITH ROUND DOWN OF RANDOMIZED NUMBER FROM 0.0 TO 1.0 WITH MAX RANGE OF choice LENGTH
@@ -15,9 +5,10 @@ function getComputerChoice() { //BEGIN getComputerChoice
 }
 
 
-function playRound(playerSelection, computerSelection) {//BEGIN playRound WITH PARAMETER playerSelection, computerSelection
+function playRound(playerSelection) {//BEGIN playRound WITH PARAMETER playerSelection, computerSelection
+  let computerSelection = getComputerChoice();
   if (playerSelection  === computerSelection){//IF playerSelection === computerSelection 
-    console.log(`Player ${playerSelection} Computer ${computerSelection} TIE`);
+    console.log(`Player ${playerSelection} Computer ${computerSelection} Tie!`);
     return 'Tie!';//DISPLAY 'Tie!'
   } else if (
           (playerSelection === 'rock' && computerSelection === 'scissors') ||//ELSE IF playerSelection === 'rock' AND computerSelection === 'scissors' OR
@@ -32,6 +23,23 @@ function playRound(playerSelection, computerSelection) {//BEGIN playRound WITH P
   }
  } //END IF
 
+const rockBtn = document.getElementById("rockBtn");
+const paperButn= document.getElementById("paperBtn");
+const scissorsBtn = document.getElementById("scissorsBtn");
+
+rockBtn.addEventListener("click", function() {
+    playRound("rock");
+});
+
+paperBtn.addEventListener("click", function() {
+    playRound("paper");
+});
+
+scissorsBtn.addEventListener("click", function() {
+    playRound("scissors");
+});
+
+/*
 function game() {//BEGIN game
   let playerScore = 0 ;//STORE playerScore WITH 0
   let computerScore = 0 ;//STORE computerScore WITH 0
@@ -56,3 +64,4 @@ function game() {//BEGIN game
 }//END IF
 
 game()//CALL game
+*/
