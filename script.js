@@ -1,4 +1,4 @@
-let choice = ['rock', 'paper', 'scissors'] //STORE choice AS ARRAY WITH ['rock', 'paper', 'scissors']
+let choice = ['ROCK', 'PAPER', 'SCISSORS'] //STORE choice AS ARRAY WITH ['rock', 'paper', 'scissors']
 function getComputerChoice() { //BEGIN getComputerChoice
   let computerChoice = Math.floor(Math.random() * choice.length);//  SET computerChoice WITH ROUND DOWN OF RANDOMIZED NUMBER FROM 0.0 TO 1.0 WITH MAX RANGE OF choice LENGTH
   return choice[computerChoice];//  DISPLAY choice[computerChoice]
@@ -8,18 +8,33 @@ function getComputerChoice() { //BEGIN getComputerChoice
 function playRound(playerSelection) {//BEGIN playRound WITH PARAMETER playerSelection, computerSelection
   let computerSelection = getComputerChoice();
   if (playerSelection  === computerSelection){//IF playerSelection === computerSelection 
-    console.log(`Player ${playerSelection} Computer ${computerSelection} Tie!`);
+    document.getElementById('singleResult').innerHTML = (`It's a stalemate between A ${playerSelection} and A ${computerSelection}`);
+    console.log(`It's a stalemate between A ${playerSelection} and A ${computerSelection}`);
+    console.log(`player ${playerScore} com ${computerScore}`);
     return 'Tie!';//DISPLAY 'Tie!'
   } else if (
-          (playerSelection === 'rock' && computerSelection === 'scissors') ||//ELSE IF playerSelection === 'rock' AND computerSelection === 'scissors' OR
-          (playerSelection === 'paper' && computerSelection === 'rock') ||
-          (playerSelection === 'scissors' && computerSelection === 'paper')
+          (playerSelection === 'ROCK' && computerSelection === 'SCISSORS') ||//ELSE IF playerSelection === 'rock' AND computerSelection === 'scissors' OR
+          (playerSelection === 'PAPER' && computerSelection === 'ROCK') ||
+          (playerSelection === 'SCISSORS' && computerSelection === 'PAPER')
   ) {
+    playerScore++
+    document.getElementById('singleResult').innerHTML = (`Player's ${playerSelection} demolished Computer's ${computerSelection}`);
     console.log(`Player ${playerSelection} Computer ${computerSelection} Player Win`);
+    console.log(`player ${playerScore} com ${computerScore}`);
     return 'Player Win!'//DISPLAY 'Player Win!'
   } else {
+    computerScore++ ;
+    document.getElementById('singleResult').innerHTML = (`Player's ${playerSelection} is crushed by Computer's ${computerSelection}`)
     console.log(`Player ${playerSelection} Computer ${computerSelection} Player Lose`);
+    console.log(`player ${playerScore} com ${computerScore}`);
     return 'Player Lose!' //DISPLAY 'Player Lose!'
+  }
+  for (let i = 0; i < 5; i++) {
+    if ((playerScore > computerScore)&&(playerScore == 5)) {
+      document.getElementById('finalResult').innerHTML = (`Player WIN with ${playerScore}-${computerScore} Score`);
+    } else if (playerScore < computerScore && computerScore == 5) {
+      document.getElementById('finalResult').innerHTML = (`Computer WIN with ${playerScore}-${computerScore} Score`);
+    }
   }
  } //END IF
 
@@ -28,17 +43,22 @@ const paperButn= document.getElementById("paperBtn");
 const scissorsBtn = document.getElementById("scissorsBtn");
 
 rockBtn.addEventListener("click", function() {
-    playRound("rock");
+    playRound("ROCK");
 });
 
 paperBtn.addEventListener("click", function() {
-    playRound("paper");
+    playRound("PAPER");
 });
 
 scissorsBtn.addEventListener("click", function() {
-    playRound("scissors");
+    playRound("SCISSORS");
 });
+let playerScore = 0 ;
+let computerScore = 0 ;
 
+document.getElementById('playerScore').innerHTML = (`Player Score is ${playerScore}`);
+document.getElementById('computerScore').innerHTML = (`Computer Score is ${computerScore}`);
+console.log(`player ${playerScore} com ${computerScore}`);
 /*
 function game() {//BEGIN game
   let playerScore = 0 ;//STORE playerScore WITH 0
